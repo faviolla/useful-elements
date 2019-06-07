@@ -5,13 +5,14 @@ Handy plugins and markup elements
 $ git init
 $ git remote add origin NAME_REPOSITORY
 ```
+[Pages list](https://faviolla.github.io/useful-elements/src/index.html)
 
 -- --------------- --
 -- Pages list --
 -- --------------- --
-[Rating](https://faviolla.github.io/useful-elements/src/rating/index.html) <br/>
-[Product item](https://faviolla.github.io/useful-elements/src/product-item/index.html) <br/>
-[Modals - callback, validation](https://faviolla.github.io/useful-elements/src/ajax-modals/index.html) <br/>
+Rating <br/>
+Product item <br/>
+Modals - callback, validation <br/>
 Toggle link more <br/>
 Sticky product <br/>
 Sticky footer <br/>
