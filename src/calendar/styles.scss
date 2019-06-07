@@ -1,0 +1,61 @@
+
+@import 'datepicker';
+* {
+    box-sizing: border-box;
+}
+input[type = "button"] {
+    -webkit-appearance: button;
+    cursor: pointer;
+}
+
+.select-date {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+    width: 209px;
+    height: 45px;
+    border-radius: 4px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    .date-selecting-link {
+        display: flex;
+        align-items: center;
+        input {
+            border: none;
+            background-color: transparent;
+        }
+    }
+    svg {
+        width: 10px;
+        height: 10px;
+        fill: #958a8a;
+        fill-rule: evenodd;
+    }
+}
+.icon-calendar {
+    width: 19px;
+    height: 17px;
+    display: inline-block;
+    background: url('/calendar/img/ic-calendar.svg') no-repeat;
+}
+
+.datepickers-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    .datepicker {
+        &.active {
+            opacity: 1;
+            transform: translate(0);
+            transition: opacity 0.3s ease, transform 0.3s ease, left 0s 0s, -webkit-transform 0.3s ease;
+        }
+        border: none;
+        width: 293px;
+        box-shadow: 0 3px 27px rgba(196, 196, 196, 0.68);
+        border-radius: 0;
+        padding: 16px 30px;
+        margin-left: -34px;
+        box-sizing: border-box;
+    }
+}
