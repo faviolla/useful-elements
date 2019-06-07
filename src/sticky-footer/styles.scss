@@ -1,0 +1,22 @@
+html {
+    background: #efefef;
+}
+html,body {
+    height: 100%;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+header,
+footer {
+    flex: 0 0 auto;
+    background-color: #27313C;
+    padding: 20px 40px;
+    color: #efefef;
+}
+main {
+    flex: 1 0 auto;
+    padding: 60px 40px;
+}

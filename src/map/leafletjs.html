@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Leaflet Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+    integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+    crossorigin=""/>
+</head>
+<body>
+    <style>
+        #mapid { height: 600px; }
+    </style>
+    <div id="mapid"></div>
+    <div class="select-holder">
+        <div class="input-holder">
+            <select id="select" class="pre_valid select-suggest" value="Київ" data-search-placeholder="Пошук...">
+                <option data-city="kiev" data_s="50.4501" data_n="30.5234" value="kiev" selected>
+                    Київ</option>
+                <option data-city="lvov" data_s="49.839683" data_n="24.029717" value="lvov">Львів
+                </option>
+                <option data-city="odessa" data_s="46.482526" data_n="30.72331" value="odessa">Одеса
+                </option>
+                <option data-city="kharkov" data_s="49.9935" data_n="36.230383" value="kharkov">
+                    Харків</option>
+                <option data-city="kherson" data_s="46.635417" data_n="32.616867" value="kherson">
+                    Херсон</option>
+            </select>
+        </div>
+    </div>
+    <div class="info-holder">
+        <ul>
+            <li data-s="50.442277" data-n="30.548494" data-mobile="067 249-62-09"
+                data-schedule="пн-сб 10:00-19:00, вс 10:00-17:00" data-address="Киев, ул. Ивана Мазепы, 9">
+                <address class="address">Киев, ул. Ивана Мазепы, 9</address>
+                <span class="phone">тел:099 999-99-99</span>
+                <span class="work-time">пн-сб 10:00-19:00, вс 10:00-17:00</span>
+                <div class="get_directions">
+                    <a href="#map" onclick="goToMap(this);">Показать на карте</a>
+                </div>
+            </li>
+            <li data-s="50.451077294481" data-n="30.523135084658" data-mobile="067 249-62-09"
+                data-schedule="пн-сб 10:00-19:00, вс 10:00-17:00" data-address="Киев, ул. Рейтарская, 2-А">
+                <address class="address">Киев, ул. Рейтарская, 2-А</address>
+                <span class="phone">тел: 099 999-99-99</span>
+                <span class="work-time">пн-сб 10:00-19:00, вс 10:00-17:00</span>
+                <div class="get_directions">
+                    <a href="#map" onclick="goToMap(this);">Показать на карте</a>
+                </div>
+            </li>
+            <li data-s="50.4117497" data-n="30.5488717" data-mobile="067 249-62-09"
+                data-schedule="пн-сб 10:00-19:00, вс 10:00-17:00"
+                data-address="Киев, Майдан Независимости (1-я линия), ТРК «Глобус»">
+                <address class="address">Киев, Майдан Независимости (1-я линия), ТРК «Глобус»</address>
+                <span class="phone">тел: 099 999-99-99</span>
+                <span class="work-time">пн-сб 10:00-19:00, вс 10:00-17:00</span>
+                <div class="get_directions">
+                    <a href="#map" onclick="goToMap(this);">Показать на карте</a>
+                </div>
+            </li>
+            <li data-s="50.453368" data-n="30.504289" data-mobile="067 249-62-09"
+                data-schedule="пн-сб 10:00-19:00, вс 10:00-17:00"
+                data-address="Киев, ул. Михаила Бойчука (Киквидзе), 22">
+                <address class="address">Киев, ул. Михаила Бойчука (Киквидзе), 22</address>
+                <span class="phone">тел:099 999-99-99</span>
+                <span class="work-time">пн-сб 10:00-19:00, вс 10:00-17:00</span>
+                <div class="get_directions">
+                    <a href="#map" onclick="goToMap(this);">Показать на карте</a>
+                </div>
+            </li>
+            <li data-s="50.451277" data-n="30.513447" data-mobile="067 249-62-09"
+                data-schedule="пн-сб 10:00-19:00, вс 10:00-17:00"
+                data-address="Киев, ул. Луговая, 12 (2 линия), ТЦ «Караван»">
+                <address class="address">Киев, ул. Луговая, 12 (2 линия), ТЦ «Караван»</address>
+                <span class="phone">тел: 099 999-99-99</span>
+                <span class="work-time">пн-сб 10:00-19:00, вс 10:00-17:00</span>
+                <div class="get_directions">
+                    <a href="#map" onclick="goToMap(this);">Показать на карте</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+ <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+ integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+ crossorigin=""></script>
+ <script>
+
+    var cities = L.layerGroup();
+    var locationInfo = [
+        {
+           'lat' : 50.451277,
+           'lang' : 30.513447,
+           'phone' : '099-999-99-99',
+           'phone1' : '088-888-88-88' 
+        },
+        {
+           'lat' : 50.453368,
+           'lang' : 30.504289,
+           'phone' : '099-999-99-99',
+           'phone1' : '088-888-88-88' 
+        },
+        {
+           'lat' : 50.4117497,
+           'lang' : 30.5488717,
+           'phone' : '044-444-44-44',
+           'phone1' : '088-888-88-88' 
+        },
+        {
+           'lat' : 50.451277,
+           'lang' : 30.513447,
+           'phone' : '099-999-99-99',
+           'phone1' : '088-888-88-88' 
+        },
+        {
+           'lat' : 50.442277,
+           'lang' : 30.548494,
+           'phone' : '095-555-55-55',
+           'phone1' : '088-888-88-88' 
+        }      
+    ];
+    
+
+    for (var i = 0; i < locationInfo.length; i++) {
+        L.marker([locationInfo[i].lat , locationInfo[i].lang]).bindPopup(locationInfo[i].phone).addTo(cities)
+    }
+
+	var mbAttr = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+			'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+			'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+		mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
+
+	var streets  = L.tileLayer(mbUrl, {id: 'mapbox.streets',   attribution: mbAttr});
+
+	var map = L.map('mapid', {
+		center: [50.451277, 30.548494],
+		zoom: 10,
+		layers: [streets, cities]
+    });
+    
+    function goToMap(data) {
+        var dataS = data.closest('li').getAttribute('data-s'),
+            dataN = data.closest('li').getAttribute('data-n');
+        map.setView([dataS, dataN] , 14)
+    }
+
+    //select change
+    var select = document.getElementById('select');
+    select.addEventListener( 'change' , function () {
+        var dataS, dataN; 
+        for (var i = 0; i < select.options.length; i++) {
+            var option = select.options[i];
+                if(option.selected) {
+                    dataS = option.getAttribute('data_s');
+                    dataN = option.getAttribute('data_n');                   
+                }
+            }
+            map.setView([dataS, dataN] , 14);
+        }); 
+</script>    
+</body>
+</html>

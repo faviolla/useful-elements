@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Google Map</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jQueryFormStyler/2.0.2/jquery.formstyler.css">
+    <link rel="stylesheet" href="../css/map/styles.css">
+</head>
+
+<body>
+    <div class="map-holder">
+        <div class="map multiple-map" id="map"></div>
+    </div>
+    <div class="select-holder">
+        <div class="input-holder">
+            <select id="city_select" class="pre_valid select-suggest" value="Київ" data-search-placeholder="Пошук...">
+                <option data-city="kiev" data-gmaps_s="50.4501" data-gmaps_n="30.5234" value="kiev" selected>
+                    Київ</option>
+                <option data-city="lvov" data-gmaps_s="49.839683" data-gmaps_n="24.029717" value="lvov">Львів
+                </option>
+                <option data-city="odessa" data-gmaps_s="46.482526" data-gmaps_n="30.72331" value="odessa">Одеса
+                </option>
+                <option data-city="kharkov" data-gmaps_s="49.9935" data-gmaps_n="36.230383" value="kharkov">
+                    Харків</option>
+                <option data-city="kherson" data-gmaps_s="46.635417" data-gmaps_n="32.616867" value="kherson">
+                    Херсон</option>
+            </select>
+        </div>
+    </div>
+    <div class="info-holder">
+        <ul>
+            <li data-gmaps-s="50.442277" data-gmaps-n="30.548494" data-mobile="067 249-62-09"
+                data-schedule="пн-сб 10:00-19:00, вс 10:00-17:00" data-address="Киев, ул. Ивана Мазепы, 9">
+                <address class="address">Киев, ул. Ивана Мазепы, 9</address>
+                <span class="phone">тел:099 999-99-99</span>
+                <span class="work-time">пн-сб 10:00-19:00, вс 10:00-17:00</span>
+                <div class="get_directions">
+                    <a href="#map" onclick="goToGmaps(this);">Показать на карте</a>
+                </div>
+            </li>
+            <li data-gmaps-s="50.451077294481" data-gmaps-n="30.523135084658" data-mobile="067 249-62-09"
+                data-schedule="пн-сб 10:00-19:00, вс 10:00-17:00" data-address="Киев, ул. Рейтарская, 2-А">
+                <address class="address">Киев, ул. Рейтарская, 2-А</address>
+                <span class="phone">тел: 099 999-99-99</span>
+                <span class="work-time">пн-сб 10:00-19:00, вс 10:00-17:00</span>
+                <div class="get_directions">
+                    <a href="#map" onclick="goToGmaps(this);">Показать на карте</a>
+                </div>
+            </li>
+            <li data-gmaps-s="50.4117497" data-gmaps-n="30.5488717" data-mobile="067 249-62-09"
+                data-schedule="пн-сб 10:00-19:00, вс 10:00-17:00"
+                data-address="Киев, Майдан Независимости (1-я линия), ТРК «Глобус»">
+                <address class="address">Киев, Майдан Независимости (1-я линия), ТРК «Глобус»</address>
+                <span class="phone">тел: 099 999-99-99</span>
+                <span class="work-time">пн-сб 10:00-19:00, вс 10:00-17:00</span>
+                <div class="get_directions">
+                    <a href="#map" onclick="goToGmaps(this);">Показать на карте</a>
+                </div>
+            </li>
+            <li data-gmaps-s="50.453368" data-gmaps-n="30.504289" data-mobile="067 249-62-09"
+                data-schedule="пн-сб 10:00-19:00, вс 10:00-17:00"
+                data-address="Киев, ул. Михаила Бойчука (Киквидзе), 22">
+                <address class="address">Киев, ул. Михаила Бойчука (Киквидзе), 22</address>
+                <span class="phone">тел:099 999-99-99</span>
+                <span class="work-time">пн-сб 10:00-19:00, вс 10:00-17:00</span>
+                <div class="get_directions">
+                    <a href="#map" onclick="goToGmaps(this);">Показать на карте</a>
+                </div>
+            </li>
+            <li data-gmaps-s="50.451277" data-gmaps-n="30.513447" data-mobile="067 249-62-09"
+                data-schedule="пн-сб 10:00-19:00, вс 10:00-17:00"
+                data-address="Киев, ул. Луговая, 12 (2 линия), ТЦ «Караван»">
+                <address class="address">Киев, ул. Луговая, 12 (2 линия), ТЦ «Караван»</address>
+                <span class="phone">тел: 099 999-99-99</span>
+                <span class="work-time">пн-сб 10:00-19:00, вс 10:00-17:00</span>
+                <div class="get_directions">
+                    <a href="#map" onclick="goToGmaps(this);">Показать на карте</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/jQueryFormStyler/2.0.2/jquery.formstyler.js"></script>
+    <script type="text/javascript">
+        $('.select-suggest').styler({
+            selectSearch: true
+        });
+
+        // initMap();
+        var markers = [];
+
+        function initMap() {
+            window.GoogleMap = new google.maps.Map(document.getElementById('map'), {
+                zoom: 10,
+                center: { lat: 50.4501, lng: 30.523400000000038 },
+                scrollwheel: false,
+                styles: [{ "featureType": "road", "elementType": "geometry", "stylers": [{ "lightness": 100 }, { "visibility": "simplified" }] }, { "featureType": "water", "elementType": "geometry", "stylers": [{ "visibility": "on" }, { "color": "#C6E2FF" }] }, { "featureType": "poi", "elementType": "geometry.fill", "stylers": [{ "color": "#C5E3BF" }] }, { "featureType": "road", "elementType": "geometry.fill", "stylers": [{ "color": "#D1D1B8" }] }]
+            });
+            window.geocoder = new google.maps.Geocoder();
+            geocoder.geocode({ 'address': 'kiev' }, function (results, status) {
+                if (status === google.maps.GeocoderStatus.OK) {
+                    GoogleMap.setCenter(results[0].geometry.location);
+                }
+            });
+        }
+
+        var gmArr = [{
+            "PHONE": "",
+            "SCHEDULE": "\u043f\u043d-\u0441\u0431 10:00-19:00, \u0432\u0441 10:00-17:00",
+            "ADDRESS": "\u041a\u0438\u0435\u0432, \u0443\u043b. \u0418\u0432\u0430\u043d\u0430 \u041c\u0430\u0437\u0435\u043f\u044b, 9\r\n",
+            "GPS_N": "50.442277",
+            "GPS_S": "30.548494",
+            "UF_MOBILE": "099 999-99-99"
+        }, {
+            "PHONE": "",
+            "SCHEDULE": "\u043f\u043d-\u0432\u0441 10.00-22.00",
+            "ADDRESS": "\u041a\u0438\u0435\u0432, \u041c\u0430\u0439\u0434\u0430\u043d \u041d\u0435\u0437\u0430\u0432\u0438\u0441\u0438\u043c\u043e\u0441\u0442\u0438 (1-\u044f \u043b\u0438\u043d\u0438\u044f), \u0422\u0420\u041a \u00ab\u0413\u043b\u043e\u0431\u0443\u0441\u00bb\r\n",
+            "GPS_N": "50.451077294481",
+            "GPS_S": "30.523135084658",
+            "UF_MOBILE": "099 999-99-99"
+        }, {
+            "PHONE": "",
+            "SCHEDULE": "\u043f\u043d-\u0441\u0431 10:00-19:00, \u0432\u0441 10:00-17:00",
+            "ADDRESS": "\u041a\u0438\u0435\u0432, \u0443\u043b. \u041c\u0438\u0445\u0430\u0438\u043b\u0430 \u0411\u043e\u0439\u0447\u0443\u043a\u0430 (\u041a\u0438\u043a\u0432\u0438\u0434\u0437\u0435), 22\r\n",
+            "GPS_N": "50.4117497",
+            "GPS_S": "30.5488717",
+            "UF_MOBILE": "099 999-99-99"
+        }, {
+            "PHONE": "",
+            "SCHEDULE": "\u043f\u043d-\u0441\u0431 10:00-19:00, \u0432\u0441 10:00-17:00",
+            "ADDRESS": "\u041a\u0438\u0435\u0432, \u0443\u043b. \u0420\u0435\u0439\u0442\u0430\u0440\u0441\u043a\u0430\u044f, 2-\u0410\r\n",
+            "GPS_N": "50.451277",
+            "GPS_S": "30.513447",
+            "UF_MOBILE": "099 999-99-99"
+        }, {
+            "PHONE": "",
+            "SCHEDULE": "\u043f\u043d-\u0432\u0441 10:00-22:00",
+            "ADDRESS": "\u041a\u0438\u0435\u0432, \u0443\u043b. \u041b\u0443\u0433\u043e\u0432\u0430\u044f, 12 (2 \u043b\u0438\u043d\u0438\u044f), \u0422\u0426 \u00ab\u041a\u0430\u0440\u0430\u0432\u0430\u043d\u00bb\r\n",
+            "GPS_N": "50.387160159297",
+            "GPS_S": "30.454937238246",
+            "UF_MOBILE": "099 999-99-99"
+        }, {
+            "PHONE": "",
+            "SCHEDULE": "\u043f\u043d-\u0432\u0441 10:00-22:00",
+            "ADDRESS": "\u041a\u0438\u0435\u0432, \u0443\u043b. \u041b\u0443\u0433\u043e\u0432\u0430\u044f, 12 (2 \u043b\u0438\u043d\u0438\u044f), \u0422\u0426 \u00ab\u041a\u0430\u0440\u0430\u0432\u0430\u043d\u00bb\r\n",
+            "GPS_N": "50.01197",
+            "GPS_S": "36.2420988",
+            "UF_MOBILE": "099 999-99-99"
+        }]
+
+        setTimeout(function () {
+            window.SetMarker = function (s, n, adress, schedule, phone, mobile) {
+                if (s == 0 || n == 0) return;
+                var marker = new google.maps.Marker({
+                    map: GoogleMap,
+                    position: { lat: +s, lng: +n },
+                    icon: 'img/marker.svg'
+                }),
+                    infowindow = new google.maps.InfoWindow(),
+                    cont = "<div class='infoblock'>";
+                cont += "<div class='adress'>" + adress + "</div>";
+                if (phone || mobile) {
+                    cont += "<div class='phone'>";
+                    if (phone) {
+                        cont += "<div class='one_phone city_phone'>" + phone + "</div><a href='tel:" + phone + "' class='one_phone city_phone mobile'>" + phone + "<a/>";
+                    }
+                    if (mobile) {
+                        cont += "<div class='one_phone mobile_phone'>" + mobile + "</div><a href='tel:" + mobile + "' class='one_phone mobile_phone mobile'>" + mobile + "<a/>";
+                    }
+                    cont += "</div>";
+                }
+                cont += "<div class='time'>" + schedule + "</div>";
+                cont += "</div>";
+                google.maps.event.addListener(marker, 'click', (function (marker, content, infowindow) {
+                    return function () {
+                        infowindow.setContent(content);
+                        infowindow.open(GoogleMap, marker);
+                    };
+                })(marker, cont, infowindow));
+
+                markers.push(marker);
+            };
+            for (var i = 0; i < gmArr.length; i++) {
+                SetMarker(gmArr[i]['GPS_N'], gmArr[i]['GPS_S'], gmArr[i]['ADDRESS'], gmArr[i]['SCHEDULE'], gmArr[i]['PHONE'], gmArr[i]['UF_MOBILE'])
+            }
+        }, 1000);
+
+
+        function clearMarkers() {
+            for (var i = 0; i < markers.length; i++) {
+                markers[i].setMap(null);
+            }
+        }
+
+        function goToGmaps(e) {
+            if ($(e).data('city')) {
+                GoogleMap.setCenter({ lat: +e.data('gmaps-s'), lng: +e.data('gmaps-n') });
+                GoogleMap.setZoom(10);
+                return false;
+            } else {
+                var parent = $(e).parents('li');
+                GoogleMap.setCenter({ lat: +parent.data('gmaps-s'), lng: +parent.data('gmaps-n') });
+                GoogleMap.setZoom(18);
+                $("body").scrollTop(320);
+                return false;
+            }
+        }
+
+
+
+        $(document).change('.jq-selectbox__select-text', function () {
+            var ul_id = $('option:contains("' + $('.jq-selectbox__select-text').html() + '")').val();
+            $('.sales-agent-content ul').each(function () {
+                ($(this).attr('id') == ul_id) ? $(this).css('display', 'block') : $(this).css('display', 'none');
+            });
+
+            var gmaps_s = $('option:contains("' + $('.jq-selectbox__select-text').html() + '")').data('gmaps_s');
+            var gmaps_n = $('option:contains("' + $('.jq-selectbox__select-text').html() + '")').data('gmaps_n');
+
+            GoogleMap.setCenter({ lat: +gmaps_s, lng: +gmaps_n });
+            GoogleMap.setZoom(10);
+        });  
+    </script>
+
+    <script
+        src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+        </script>
+    <script async="" defer=""
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0DxMMYRhqIFoFb4io4uzMqOk29kSaNso&amp;callback=initMap">
+        </script>
+    <script src="main.js"></script>
+</body>
+
+</html>

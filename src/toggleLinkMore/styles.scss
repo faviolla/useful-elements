@@ -1,0 +1,38 @@
+.review-box {
+  max-width: 1000px;
+}
+.link__more {
+  color: #999;
+  cursor: pointer;
+}
+.review__text {
+  display: inline-block;
+  width: 100%;
+  max-height: 100px;
+  overflow: hidden;
+  transition: .5s;
+  position: relative;
+  &.bg-gradient {
+    &:after {
+      background: -moz-linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 60%,rgba(255,255,255,1) 100%);
+      background: -webkit-linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 60%,rgba(255,255,255,1) 100%);
+      background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 60%,rgba(255,255,255,1) 100%);
+    }
+  }
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 30px;
+  }
+  &-holder {
+
+  }
+}
+.opened {
+  .review__text {
+    max-height: 999px;
+  }
+}

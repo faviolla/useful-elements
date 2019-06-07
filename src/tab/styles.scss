@@ -1,0 +1,13 @@
+.tab-content{
+    display:none;
+}
+.tab-content.active {
+    display:block;
+}
+.tab-link {
+    cursor: pointer;
+    display: inline-block;
+}
+.tab-link.active {
+    border-bottom: 1px solid pink;
+}
