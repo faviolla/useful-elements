@@ -1,0 +1,236 @@
+* {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    outline: none;
+}
+
+/* modals */
+.modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1050;
+    display: none;
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+    outline: 0;
+    &-open {
+        overflow: hidden;
+        .modal {
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+    }
+    &-backdrop {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1040;
+        background: rgba(51,51,51,.7);
+        &.fade {
+            opacity: 0;
+        }
+        &.in {
+            opacity: 1;
+        }
+    }
+    &-content {
+        position: relative;
+        background: #fff;
+        outline: 0;
+        width: 600px;
+        border: 0;
+    }
+    &-body {
+        padding: 50px 40px;
+    }
+    &-dialog {
+        position: relative;
+        width: auto;
+        margin: 10px;
+    }
+    &-callback-form {
+        width: 400px;
+    }
+    &-text {
+        font-size: 16px;
+        line-height: 20px;
+        p {
+            margin: 0;
+        }
+    }
+    &-content-form {
+        width: 450px;
+    }
+}
+.fade {
+    opacity: 0;
+    transition: opacity .15s linear;
+    &.in {
+        opacity: 1;
+    }
+}
+
+#modal-main {
+    display: block !important;
+    z-index: 1;
+    pointer-events: none;
+    &.in {
+        z-index: 1050;
+        pointer-events: inherit;
+    }
+}
+.modal.fade .modal-dialog {
+    transition: transform .3s ease-out;
+    transform: translate(0,5%);
+}
+.modal.in .modal-dialog {
+    transform: translate(0,0);
+}
+#modal-main .modal-dialog {
+    width: auto;
+    margin: auto;
+    display: inline-block;
+    vertical-align: top;
+}
+.close-modal {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 13px;
+    height: 13px;
+}
+.close-modal:before {
+    content: '';
+    width: 2px;
+    height: 15px;
+    background: #d7cebd;
+    transform: rotate(-45deg);
+    position: absolute;
+    top: 0;
+    left: calc(50% - 1px);
+    transform-origin: 50% 50%;
+}
+.close-modal:after {
+    content: '';
+    width: 2px;
+    height: 15px;
+    background: #d7cebd;
+    transform: rotate(45deg);
+    position: absolute;
+    top: 0;
+    left: calc(50% - 1px);
+    transform-origin: 50% 50%;
+}
+.popup-title {
+    display: block;
+    text-align: center;
+    font-size: 20px;
+    line-height: 30px;
+    margin: 0 0 20px;
+}
+
+.form-group {
+    margin: 5px 0 30px;
+}
+.input-holder {
+    position: relative;
+    .input {
+        &:focus {
+            border-color: #326bdb;
+        }
+    }
+    &.correct {
+        .input {
+            border-color: #219653;
+        }
+    }
+    &.error {
+        .input {
+            border-color: #E84D4D;
+        }
+    }
+}
+input {
+    &.input {
+        height: 53px;
+        border: 1px solid #e0e0e0;
+        color: #1f1f1f;
+        padding: 5px 20px;
+        background: #fff;
+        width: 100%;
+    }
+}
+.btn {
+    text-decoration: none;
+    border: 1px solid transparent;
+    border-radius: 0;
+    padding: 13px 15px 9px;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #000000;
+    cursor: pointer;
+    &-primary {
+        background: #ffca40;
+        border-color: #ffca40;
+        border-bottom: 3px solid #e5b946;
+        &:hover {
+            background-color: #f4bf36;
+            border-color: #f4bf36;
+            border-bottom-color: #e5b946;
+        }
+    }
+    &-submit {
+        width: 100%;
+    }
+}
+.label-input {
+    position: absolute;
+    top: 18px;
+    left: 21px;
+    transition: all cubic-bezier(.25,.8,.20,1) .3s;
+    pointer-events: none;
+    color: #555;
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: normal;
+}
+.input.dropdown~.label-input,
+.input.has-value~.label-input,
+.input:focus~.label-input {
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: .06em;
+    font-weight: bold;
+    top: -19px;
+    left: 1px;
+}
+.error {
+    &-text {
+        color: #E84D4D;
+        font-size: 12px;
+        line-height: 14px;
+        font-style: italic;
+        padding-top: 6px;
+        display: none;
+    }
+    .error-text {
+        display: block;
+    }
+}
+
+@media (max-width: 991px) {
+    #modal-main .modal-dialog {
+        width: 90%;
+    }
+    .modal-content {
+        width: 100%;
+    }
+}
