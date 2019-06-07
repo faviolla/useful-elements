@@ -9,38 +9,38 @@ $ git remote add origin NAME_REPOSITORY
 -- --------------- --
 -- Pages list --
 -- --------------- --
-Rating
-Product item
-Modals - callback, validation
-Toggle link more
-Sticky product
-Sticky footer
+Rating <br/>
+Product item <br/>
+Modals - callback, validation <br/>
+Toggle link more <br/>
+Sticky product <br/>
+Sticky footer <br/>
 -- --------------- --
 -- Tabs --
 -- --------------- --
-Tab
-Tabs => to mobile Accordion
+Tab <br/>
+Tabs => to mobile Accordion <br/>
 -- --------------- --
 -- Vidgets --
 -- --------------- --
-Countdown
-Calendar
+Countdown <br/>
+Calendar <br/>
 -- --------------- --
 -- Burger menu --
 -- --------------- --
-Burger button
-Mobile submenu
+Burger button <br/>
+Mobile submenu <br/>
 -- --------------- --
 -- Slider --
 -- --------------- --
-Slider preloader
-Progress bar slider
+Slider preloader <br/>
+Progress bar slider <br/>
 -- --------------- --
 -- Visual effects --
 -- --------------- --
-Parallax css effect
-Parallax css + js effect
-Imageboard
+Parallax css effect <br/>
+Parallax css + js effect <br/>
+Imageboard <br/>
 -- --------------- --
 -- Maps --
 -- --------------- --
