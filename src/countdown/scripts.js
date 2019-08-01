@@ -15,7 +15,7 @@ function initCountdown() {
 }
 
 function initCountdown2() {
-        $('.countdown').each(function () {
+        $('.countdown2').each(function () {
             var d = $(this).data('d'),
                 h = $(this).data('h'),
                 m = $(this).data('m'),
