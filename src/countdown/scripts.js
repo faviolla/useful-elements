@@ -1,4 +1,5 @@
 initCountdown();
+initCountdown2();
 
 function initCountdown() {
     $('.countdown').each(function () {
@@ -12,3 +13,22 @@ function initCountdown() {
         });
     });
 }
+
+function initCountdown2() {
+        $('.countdown').each(function () {
+            var d = $(this).data('d'),
+                h = $(this).data('h'),
+                m = $(this).data('m'),
+                s = $(this).data('s');
+
+            $(this).countdown($(this).data('date'), {defer: true })
+                .on('update.countdown', function (event) {
+                    $(this).html(event.strftime(''
+                        + '<div class="days flip"><span class="count"><span class="num">%D</span>'+d +'</span><span class="dots"> :</span></div>'
+                        + '<div class="hours flip"><span class="count"><span class="num"> %H</span>'+h +'</span><span class="dots"> :</span></div>'
+                        + '<div class="minutes flip"><span class="count"><span class="num"> %M</span>'+m +'</span><span class="dots"> :</span></div>'
+                        + '<div class="seconds flip"><span class="count"><span class="num"> %S</span>'+s+'</span></div>'
+                    ));
+                });
+        }).countdown('start');
+    }
