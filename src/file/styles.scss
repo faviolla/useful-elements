@@ -77,3 +77,27 @@ img {
   padding: 4px;
   font-size: 1.3rem;
 }
+
+
+
+.upload-btn-wrapper {
+  display: flex;
+  align-items: center;
+  i {
+    margin-right: 7px;
+    display: inline-block;
+    vertical-align: middle;
+    width: 18px;
+    height: 28px;
+  }
+}
+.label-file {
+  position: relative;
+  cursor: pointer;
+  color: blue;
+  margin: 0;
+  font-size: 14px;
+}
+.input-file {
+  display: none;
+}

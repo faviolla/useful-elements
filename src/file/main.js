@@ -39,3 +39,9 @@ function removeImg(){
 removeImg();
 
 document.getElementById('files').addEventListener('change', handleFileSelect, false);
+
+
+$(".upload-btn-wrapper input[type=file]").change(function(){
+  var filename = $(this).val().replace(/.*\\/, "");
+  $("#file-name").html(filename);
+});
