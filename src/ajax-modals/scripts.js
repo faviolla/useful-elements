@@ -88,3 +88,48 @@ function formThx(form , url) {
         }
     });
 }
+
+
+/* Ajax success */
+modalAjaxForm();
+function modalAjaxForm() {
+  $(document).on('submit', '.js-send', function (e) {
+    e.preventDefault();
+
+    var formData = new FormData(this);
+    var $this = $(this);
+    var main_modal = $('#modal-main');
+    var method = $this.data('method') || $this.attr('method');
+    var action = $this.data('action') || $this.attr('action');
+
+    $.ajax({
+      url: action,
+      type: method,
+      dataType: 'json',
+      data: formData,
+      cache: false,
+      contentType: false,
+      processData: false,
+      success: function (res) {
+
+      }
+    });
+
+    if($this.attr("data-success")) {
+      $.ajax({
+        url: $this.attr("data-success"),
+        type: method,
+        dataType: 'text',
+        //  data: formData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function (res) {
+          main_modal.find(".modal-dialog").html(res);
+          main_modal.modal('show');
+          $this.find('.input-holder').removeClass('correct').find('input, select, textarea').not(':input[type=button], :input[type=submit]').val('');
+        }
+      });
+    }
+  })
+}
